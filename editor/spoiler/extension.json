@@ -1,0 +1,8 @@
+{
+  "name": "spoiler",
+  "displayName": "Spoiler Block",
+  "version": "1.0.0",
+  "author": "changerawr",
+  "description": "Add collapsible spoiler blocks",
+  "category": "blocks"
+}
