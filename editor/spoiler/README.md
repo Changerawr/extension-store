@@ -1,0 +1,80 @@
+# Spoiler Block Extension
+
+Add collapsible spoiler blocks with customizable titles and color schemes. Perfect for hiding plot details, quiz answers, or sensitive information.
+
+## Syntax
+
+### Basic Spoiler
+```markdown
+:::spoiler
+Hidden content goes here
+:::
+```
+
+### Custom Title
+```markdown
+:::spoiler Plot Twist Alert!
+The butler did it!
+:::
+```
+
+### Colored Spoiler with Title
+```markdown
+:::spoiler{red} Warning: Spoilers Ahead
+Major plot details revealed here!
+:::
+```
+
+## Color Schemes
+
+Available colors with their icons:
+- `default` 🔒 - Gray/blue (default)
+- `red` ⚠️ - Red theme (warnings, major spoilers)
+- `yellow` 💡 - Yellow theme (tips, hints)
+- `green` ✅ - Green theme (solutions, answers)
+- `blue` ℹ️ - Blue theme (information)
+- `purple` 🔮 - Purple theme (mystery, secrets)
+
+## Features
+
+- **Nested Markdown Support**: Use any markdown inside spoilers (bold, italic, lists, code, links, etc.)
+- **Customizable Titles**: Set your own summary text
+- **Color Schemes**: 6 built-in color themes with distinct icons
+- **Smooth Animations**: Arrow rotates when opening/closing
+- **Dark Mode**: All colors have dark mode variants
+- **Accessibility**: Proper semantic HTML with `<details>` and `<summary>`
+
+## Examples
+
+```markdown
+:::spoiler
+This is a basic spoiler with **bold text** and *italic*.
+:::
+
+:::spoiler Quiz Answer
+The answer is: 42
+:::
+
+:::spoiler{red} Major Plot Spoiler
+In the final episode, the main character reveals they were a ghost all along.
+:::
+
+:::spoiler{green} Solution
+To solve this problem:
+1. First, identify the variables
+2. Apply the formula
+3. Simplify the result
+:::
+
+:::spoiler{yellow} Pro Tip
+You can nest **any markdown** including:
+- Lists like this one
+- [Links](https://example.com)
+- `code snippets`
+- And more!
+:::
+```
+
+## Toolbar Button
+
+The extension adds an Eye icon button to the blocks toolbar section that wraps selected text in spoiler syntax.
