@@ -32,20 +32,15 @@ export const spoilerExtension: Extension = {
             type: 'spoiler',
             render: (token) => {
                 return `
-          <details class="spoiler-block border border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-4 my-4 bg-gray-50/50 dark:bg-gray-900/50 transition-all hover:bg-gray-100/50 dark:hover:bg-gray-800/50">
+          <details class="spoiler-block border border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-4 my-4 bg-gray-50/50 dark:bg-gray-900/50 transition-all hover:bg-gray-100/50 dark:hover:bg-gray-800/50 [&[open]_.spoiler-icon]:rotate-90">
             <summary class="cursor-pointer text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium select-none flex items-center gap-2">
-              <span class="spoiler-icon transition-transform">▶</span>
+              <span class="spoiler-icon transition-transform inline-block">▶</span>
               <span>Click to reveal spoiler</span>
             </summary>
             <div class="spoiler-content mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 prose dark:prose-invert max-w-none">
               ##RECURSIVE##
             </div>
           </details>
-          <style>
-            details.spoiler-block[open] .spoiler-icon {
-              transform: rotate(90deg);
-            }
-          </style>
         `.trim();
             },
         },
