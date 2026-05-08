@@ -4,7 +4,7 @@ import { spoilerToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'spoiler',
     displayName: 'Spoiler Block',
-    version: '1.0.3',
+    version: '1.0.4',
     author: 'changerawr',
     description: 'Add collapsible spoiler blocks with customizable titles and colors',
     category: 'blocks',
@@ -19,6 +19,7 @@ export const spoilerExtension: Extension = {
             name: 'spoiler',
             // Pattern supports: :::spoiler or :::spoiler Title or :::spoiler{color} Title
             pattern: /:::spoiler(?:\{([^}]+)\})?(?: ([^\n]+))?\n([\s\S]*?)\n:::/,
+            recursiveContent: true,  // Enable recursive parsing of markdown inside spoiler
             render: (match: RegExpMatchArray) => {
                 return {
                     type: 'spoiler',

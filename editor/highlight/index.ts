@@ -4,7 +4,7 @@ import { highlightToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'highlight',
     displayName: 'Text Highlighter',
-    version: '1.0.0',
+    version: '1.0.1',
     author: 'changerawr',
     description: 'Highlight important text with customizable colors',
     category: 'formatting',
