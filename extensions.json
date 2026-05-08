@@ -4,12 +4,24 @@
     {
       "name": "spoiler",
       "displayName": "Spoiler Block",
-      "description": "Add collapsible spoiler blocks",
+      "author": "changerawr",
+      "description": "Add collapsible spoiler blocks with markdown support",
       "category": "blocks",
       "path": "editor/spoiler",
       "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/spoiler",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "featured": false
+    },
+    {
+      "name": "highlight",
+      "displayName": "Text Highlighter",
+      "author": "changerawr",
+      "description": "Highlight important text with customizable colors",
+      "category": "formatting",
+      "path": "editor/highlight",
+      "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/highlight",
+      "version": "1.0.0",
+      "featured": true
     }
   ]
 }
