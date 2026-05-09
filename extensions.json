@@ -9,7 +9,7 @@
       "category": "blocks",
       "path": "editor/spoiler",
       "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/spoiler",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "featured": false
     },
     {
@@ -20,7 +20,7 @@
       "category": "formatting",
       "path": "editor/highlight",
       "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/highlight",
-      "version": "1.2.2",
+      "version": "1.2.3",
       "featured": true
     }
   ]
