@@ -8,13 +8,13 @@ interface HighlightPopoverProps {
 }
 
 const COLOR_PRESETS = [
-  { name: 'Yellow', value: 'yellow', color: 'bg-yellow-200/70' },
-  { name: 'Green', value: 'green', color: 'bg-green-200/70' },
-  { name: 'Blue', value: 'blue', color: 'bg-blue-200/70' },
-  { name: 'Red', value: 'red', color: 'bg-red-200/70' },
-  { name: 'Purple', value: 'purple', color: 'bg-purple-200/70' },
-  { name: 'Pink', value: 'pink', color: 'bg-pink-200/70' },
-  { name: 'Orange', value: 'orange', color: 'bg-orange-200/70' },
+  { name: 'Yellow', value: 'yellow', color: '#fef08ab3' },
+  { name: 'Green', value: 'green', color: '#bbf7d0b3' },
+  { name: 'Blue', value: 'blue', color: '#bfdbfeb3' },
+  { name: 'Red', value: 'red', color: '#fecacab3' },
+  { name: 'Purple', value: 'purple', color: '#e9d5ffb3' },
+  { name: 'Pink', value: 'pink', color: '#fbcfe8b3' },
+  { name: 'Orange', value: 'orange', color: '#fed7aab3' },
 ];
 
 export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
@@ -74,21 +74,22 @@ export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
   return (
     <div className="p-3">
       <div className="grid grid-cols-4 gap-1.5">
-        {COLOR_PRESETS.map((color) => (
+        {COLOR_PRESETS.map((preset) => (
           <button
-            key={color.value}
+            key={preset.value}
             onClick={() => {
-              setSelectedColor(color.value);
-              insertHighlight(color.value);
+              setSelectedColor(preset.value);
+              insertHighlight(preset.value);
             }}
             className={`relative h-10 rounded border-2 transition-all ${
-              selectedColor === color.value
+              selectedColor === preset.value
                 ? 'border-primary ring-2 ring-primary/20'
                 : 'border-border hover:border-primary/50'
-            } ${color.color}`}
-            title={color.name}
+            }`}
+            style={{ backgroundColor: preset.color }}
+            title={preset.name}
           >
-            <span className="sr-only">{color.name}</span>
+            <span className="sr-only">{preset.name}</span>
           </button>
         ))}
 
