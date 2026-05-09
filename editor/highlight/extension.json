@@ -5,6 +5,7 @@
   "author": "changerawr",
   "description": "Highlight important text with customizable colors",
   "category": "formatting",
+  "icon": "Highlighter",
   "files": {
     "required": [
       "index.ts",
