@@ -20,6 +20,7 @@ const COLOR_PRESETS = [
 export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
   const [selectedColor, setSelectedColor] = useState('yellow');
   const [customColor, setCustomColor] = useState('#ff6b6b');
+  const [isPickingCustomColor, setIsPickingCustomColor] = useState(false);
   const colorInputRef = useRef<HTMLInputElement>(null);
 
   const insertHighlight = (color?: string) => {
@@ -61,28 +62,34 @@ export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
   };
 
   const handleCustomColorClick = () => {
+    setIsPickingCustomColor(true);
+    setSelectedColor('custom');
     // Open native color picker
     colorInputRef.current?.click();
   };
 
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Just update the color preview, don't insert yet
     setCustomColor(e.target.value);
-    setSelectedColor('custom');
+  };
+
+  const handleApplyCustomColor = () => {
     insertHighlight('custom');
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3 space-y-2">
       <div className="grid grid-cols-4 gap-1.5">
         {COLOR_PRESETS.map((preset) => (
           <button
             key={preset.value}
             onClick={() => {
               setSelectedColor(preset.value);
+              setIsPickingCustomColor(false);
               insertHighlight(preset.value);
             }}
             className={`relative h-10 rounded border-2 transition-all ${
-              selectedColor === preset.value
+              selectedColor === preset.value && !isPickingCustomColor
                 ? 'border-primary ring-2 ring-primary/20'
                 : 'border-border hover:border-primary/50'
             }`}
@@ -97,12 +104,14 @@ export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
         <button
           onClick={handleCustomColorClick}
           className={`relative h-10 rounded border-2 transition-all ${
-            selectedColor === 'custom'
+            isPickingCustomColor
               ? 'border-primary ring-2 ring-primary/20'
               : 'border-border hover:border-primary/50'
           }`}
           style={{
-            background: 'linear-gradient(135deg, #ff0000 0%, #ff7f00 12.5%, #ffff00 25%, #00ff00 37.5%, #0000ff 50%, #4b0082 62.5%, #9400d3 75%, #ff0000 100%)'
+            background: isPickingCustomColor
+              ? customColor
+              : 'linear-gradient(135deg, #ff0000 0%, #ff7f00 12.5%, #ffff00 25%, #00ff00 37.5%, #0000ff 50%, #4b0082 62.5%, #9400d3 75%, #ff0000 100%)'
           }}
           title="Custom Color"
         >
@@ -118,6 +127,18 @@ export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
           />
         </button>
       </div>
+
+      {/* Apply button when browsing custom colors */}
+      {isPickingCustomColor && (
+        <div className="pt-1 border-t">
+          <button
+            onClick={handleApplyCustomColor}
+            className="w-full px-3 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded transition-colors"
+          >
+            Apply {customColor}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
