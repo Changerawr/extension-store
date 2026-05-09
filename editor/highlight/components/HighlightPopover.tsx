@@ -1,9 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useState, useRef } from 'react';
 
 interface HighlightPopoverProps {
   textarea: HTMLTextAreaElement;
@@ -22,25 +19,27 @@ const COLOR_PRESETS = [
 
 export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
   const [selectedColor, setSelectedColor] = useState('yellow');
-  const [customColor, setCustomColor] = useState('');
-  const [useCustom, setUseCustom] = useState(false);
+  const [customColor, setCustomColor] = useState('#ff6b6b');
+  const colorInputRef = useRef<HTMLInputElement>(null);
 
-  const insertHighlight = () => {
+  const insertHighlight = (color?: string) => {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const selectedText = textarea.value.substring(start, end);
     const placeholder = selectedText || 'highlighted text';
 
+    const colorToUse = color || selectedColor;
     let syntax = '';
-    if (useCustom && customColor) {
-      // Hex color format
+
+    if (colorToUse === 'custom') {
+      // Custom hex color
       syntax = `=={${customColor}}${placeholder}==`;
-    } else if (selectedColor === 'yellow') {
+    } else if (colorToUse === 'yellow') {
       // Default yellow (no color specified)
       syntax = `==${placeholder}==`;
     } else {
       // Named color
-      syntax = `=={${selectedColor}}${placeholder}==`;
+      syntax = `=={${colorToUse}}${placeholder}==`;
     }
 
     // Insert the highlight syntax
@@ -61,77 +60,62 @@ export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
     onClose();
   };
 
+  const handleCustomColorClick = () => {
+    // Open native color picker
+    colorInputRef.current?.click();
+  };
+
+  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCustomColor(e.target.value);
+    setSelectedColor('custom');
+    insertHighlight('custom');
+  };
+
   return (
-    <div className="w-80 p-4 space-y-4">
-      <div>
-        <h3 className="font-semibold mb-3">Highlight Color</h3>
-        <div className="grid grid-cols-4 gap-2">
-          {COLOR_PRESETS.map((color) => (
-            <button
-              key={color.value}
-              onClick={() => {
-                setSelectedColor(color.value);
-                setUseCustom(false);
-              }}
-              className={`relative h-12 rounded-md border-2 transition-all ${
-                selectedColor === color.value && !useCustom
-                  ? 'border-primary ring-2 ring-primary/20'
-                  : 'border-border hover:border-primary/50'
-              } ${color.color}`}
-              title={color.name}
-            >
-              <span className="sr-only">{color.name}</span>
-              {selectedColor === color.value && !useCustom && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-4 h-4 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs">
-                    ✓
-                  </div>
-                </div>
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="pt-2 border-t">
-        <Label htmlFor="custom-color" className="text-sm font-medium mb-2 block">
-          Custom Hex Color
-        </Label>
-        <div className="flex gap-2">
-          <Input
-            id="custom-color"
-            type="text"
-            placeholder="#ff6b6b"
-            value={customColor}
-            onChange={(e) => {
-              setCustomColor(e.target.value);
-              if (e.target.value.startsWith('#')) {
-                setUseCustom(true);
-              }
+    <div className="p-3">
+      <div className="grid grid-cols-4 gap-1.5">
+        {COLOR_PRESETS.map((color) => (
+          <button
+            key={color.value}
+            onClick={() => {
+              setSelectedColor(color.value);
+              insertHighlight(color.value);
             }}
-            onFocus={() => setUseCustom(true)}
-            className="flex-1"
-          />
-          {customColor && (
-            <div
-              className="w-12 h-10 rounded border-2 border-border"
-              style={{ backgroundColor: customColor }}
-              title={customColor}
-            />
-          )}
-        </div>
-        <p className="text-xs text-muted-foreground mt-1">
-          Enter a hex color code (e.g., #ff6b6b)
-        </p>
-      </div>
+            className={`relative h-10 rounded border-2 transition-all ${
+              selectedColor === color.value
+                ? 'border-primary ring-2 ring-primary/20'
+                : 'border-border hover:border-primary/50'
+            } ${color.color}`}
+            title={color.name}
+          >
+            <span className="sr-only">{color.name}</span>
+          </button>
+        ))}
 
-      <div className="flex gap-2 pt-2">
-        <Button onClick={insertHighlight} className="flex-1">
-          Insert Highlight
-        </Button>
-        <Button onClick={onClose} variant="outline">
-          Cancel
-        </Button>
+        {/* Custom color picker - 8th option */}
+        <button
+          onClick={handleCustomColorClick}
+          className={`relative h-10 rounded border-2 transition-all ${
+            selectedColor === 'custom'
+              ? 'border-primary ring-2 ring-primary/20'
+              : 'border-border hover:border-primary/50'
+          }`}
+          style={{
+            background: 'linear-gradient(135deg, #ff0000 0%, #ff7f00 12.5%, #ffff00 25%, #00ff00 37.5%, #0000ff 50%, #4b0082 62.5%, #9400d3 75%, #ff0000 100%)'
+          }}
+          title="Custom Color"
+        >
+          <span className="sr-only">Custom Color</span>
+          {/* Hidden native color input */}
+          <input
+            ref={colorInputRef}
+            type="color"
+            value={customColor}
+            onChange={handleColorChange}
+            className="absolute opacity-0 w-0 h-0"
+            aria-hidden="true"
+          />
+        </button>
       </div>
     </div>
   );
