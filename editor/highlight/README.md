@@ -1,41 +1,36 @@
-# Text Highlighter Extension
+# Highlight
 
-Highlight important text in your markdown with customizable colors.
+Mark important text with color. Now with a color picker.
 
-## Syntax
+## Basic usage
 
-### Basic Highlight (Yellow)
 ```markdown
-==highlighted text==
+==yellow highlight==
+=={green}green highlight==
+=={#ff6b6b}custom color==
 ```
 
-### Colored Highlight
-```markdown
-=={color}highlighted text==
-```
+## Color picker
 
-## Supported Colors
+Click the highlighter button to open a popover where you can:
+- Pick from 7 preset colors
+- Enter any hex color code
+- See a live preview
 
-- `yellow` (default)
-- `green`
-- `blue`
-- `red`
-- `purple`
-- `pink`
-- `orange`
+## Preset colors
+
+yellow, green, blue, red, purple, pink, orange
+
+## Custom colors
+
+Type any hex code like `#ff6b6b` or `#4a90e2` in the color picker.
 
 ## Examples
 
 ```markdown
-This is ==important text== with default yellow highlight.
+Study notes with ==key terms== highlighted.
 
-This is =={green}success text== with green highlight.
+Mark =={green}correct answers== and =={red}common mistakes==.
 
-This is =={red}error text== with red highlight.
-
-This is =={blue}info text== with blue highlight.
+Brand colors: =={#FF5733}primary== and =={#33C3FF}secondary==.
 ```
-
-## Toolbar Button
-
-The extension adds a Highlighter button to the formatting toolbar that wraps selected text with `==` markers.

@@ -25,6 +25,13 @@ Major plot details revealed here!
 :::
 ```
 
+### Hex Color Support (New!)
+```markdown
+:::spoiler{#ff6b6b} Custom Color
+Use any hex color for fully custom themes!
+:::
+```
+
 ## Color Schemes
 
 Available colors with their icons:
@@ -34,13 +41,15 @@ Available colors with their icons:
 - `green` ✅ - Green theme (solutions, answers)
 - `blue` ℹ️ - Blue theme (information)
 - `purple` 🔮 - Purple theme (mystery, secrets)
+- **Any hex code** 🎨 - Custom colors (e.g., `#ff6b6b`, `#4a90e2`, `#9b59b6`)
 
 ## Features
 
 - **Nested Markdown Support**: Use any markdown inside spoilers (bold, italic, lists, code, links, etc.)
 - **Customizable Titles**: Set your own summary text
 - **Color Schemes**: 6 built-in color themes with distinct icons
-- **Smooth Animations**: Arrow rotates when opening/closing
+- **Hex Color Support**: Use any custom hex color (e.g., `#ff6b6b`)
+- **Smooth Animations**: Arrow rotates 90° when opening/closing
 - **Dark Mode**: All colors have dark mode variants
 - **Accessibility**: Proper semantic HTML with `<details>` and `<summary>`
 

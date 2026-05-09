@@ -4,12 +4,13 @@ import { highlightToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'highlight',
     displayName: 'Text Highlighter',
-    version: '1.0.1',
+    version: '1.1.0',
     author: 'changerawr',
-    description: 'Highlight important text with customizable colors',
+    description: 'Highlight important text with customizable colors. Supports 7 preset colors and custom hex codes!',
     category: 'formatting',
     isBuiltIn: false,
     toolbar: highlightToolbar,
+    icon: 'Highlighter',  // Lucide icon name
 };
 
 export const highlightExtension: Extension = {
@@ -44,6 +45,17 @@ export const highlightExtension: Extension = {
         {
             type: 'highlight',
             render: (token) => {
+                const color = token.color || 'yellow';
+
+                // Check if color is hex code
+                const isHexColor = typeof color === 'string' && color.startsWith('#');
+
+                if (isHexColor) {
+                    // Use inline styles for hex colors
+                    return `<mark class="inline-block px-1 rounded transition-colors" style="background-color: ${color}40; color: inherit;">${token.content}</mark>`;
+                }
+
+                // Named colors
                 const colorMap: Record<string, { bg: string; text: string }> = {
                     yellow: { bg: 'bg-yellow-200/70 dark:bg-yellow-900/30', text: 'text-gray-900 dark:text-gray-100' },
                     green: { bg: 'bg-green-200/70 dark:bg-green-900/30', text: 'text-gray-900 dark:text-gray-100' },
@@ -54,8 +66,7 @@ export const highlightExtension: Extension = {
                     orange: { bg: 'bg-orange-200/70 dark:bg-orange-900/30', text: 'text-gray-900 dark:text-gray-100' },
                 };
 
-                const color = token.color || 'yellow';
-                const colors = colorMap[color] || colorMap.yellow;
+                const colors = colorMap[color as string] || colorMap.yellow;
 
                 return `<mark class="inline-block px-1 rounded ${colors.bg} ${colors.text} transition-colors">${token.content}</mark>`;
             },

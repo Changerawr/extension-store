@@ -4,12 +4,13 @@ import { spoilerToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'spoiler',
     displayName: 'Spoiler Block',
-    version: '1.0.4',
+    version: '1.0.5',
     author: 'changerawr',
-    description: 'Add collapsible spoiler blocks with customizable titles and colors',
+    description: 'Add collapsible spoiler blocks with customizable titles and colors. Supports named colors and hex codes!',
     category: 'blocks',
     isBuiltIn: false,
     toolbar: spoilerToolbar,
+    icon: 'Eye',  // Lucide icon name
 };
 
 export const spoilerExtension: Extension = {
@@ -39,6 +40,9 @@ export const spoilerExtension: Extension = {
             render: (token) => {
                 const color = token.attributes?.color || 'default';
                 const title = token.attributes?.title || 'Click to reveal spoiler';
+
+                // Check if color is hex code (starts with #)
+                const isHexColor = typeof color === 'string' && color.startsWith('#');
 
                 // Color schemes
                 const colorSchemes: Record<string, { border: string; bg: string; bgHover: string; text: string; icon: string }> = {
@@ -86,20 +90,33 @@ export const spoilerExtension: Extension = {
                     },
                 };
 
-                const scheme = colorSchemes[color] || colorSchemes.default;
+                let scheme = colorSchemes[color as string] || colorSchemes.default;
+                let customStyle = '';
+
+                // If hex color, create custom inline styles
+                if (isHexColor) {
+                    customStyle = `style="border-color: ${color}; background-color: ${color}15;"`;
+                    scheme = {
+                        border: '',
+                        bg: '',
+                        bgHover: '',
+                        text: `text-[${color}]`,
+                        icon: '🎨'
+                    };
+                }
 
                 // Use pre-rendered children from the renderer
                 const renderedChildren = token.attributes?.renderedChildren as string | undefined;
                 const renderedContent = renderedChildren || token.content;
 
                 return `
-          <details class="spoiler-block border border-dashed ${scheme.border} rounded-lg p-4 my-4 ${scheme.bg} transition-all ${scheme.bgHover} [&[open]_.spoiler-icon]:rotate-90">
+          <details class="spoiler-block group border border-dashed ${scheme.border} rounded-lg p-4 my-4 ${scheme.bg} transition-all ${scheme.bgHover}" ${customStyle}>
             <summary class="cursor-pointer ${scheme.text} font-medium select-none flex items-center gap-2">
-              <span class="spoiler-icon transition-transform inline-block duration-200">▶</span>
+              <span class="spoiler-icon transition-transform inline-block duration-200 group-open:rotate-90">▶</span>
               <span class="text-lg" role="img" aria-label="spoiler">${scheme.icon}</span>
               <span>${title}</span>
             </summary>
-            <div class="spoiler-content mt-3 pt-3 border-t ${scheme.border} prose dark:prose-invert max-w-none">
+            <div class="spoiler-content mt-3 pt-3 border-t ${scheme.border} prose dark:prose-invert max-w-none" ${isHexColor ? `style="border-color: ${color};"` : ''}>
               ${renderedContent}
             </div>
           </details>
