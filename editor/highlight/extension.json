@@ -1,7 +1,7 @@
 {
   "name": "highlight",
   "displayName": "Text Highlighter",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "author": "changerawr",
   "description": "Highlight important text with customizable colors",
   "category": "formatting",
