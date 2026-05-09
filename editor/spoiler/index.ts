@@ -4,9 +4,9 @@ import { spoilerToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'spoiler',
     displayName: 'Spoiler Block',
-    version: '1.0.9',
+    version: '1.0.10',
     author: 'changerawr',
-    description: 'Add collapsible spoiler blocks with customizable titles, colors, and icons. Supports named colors, hex codes, and custom icons!',
+    description: 'Add collapsible spoiler blocks with customizable titles, colors, and icons. Supports named colors, hex codes, custom icons, and tables!',
     category: 'blocks',
     isBuiltIn: false,
     toolbar: spoilerToolbar,
@@ -121,7 +121,7 @@ export const spoilerExtension: Extension = {
               <span class="text-lg" role="img" aria-label="spoiler">${displayIcon}</span>
               <span>${title}</span>
             </summary>
-            <div class="spoiler-content mt-3 pt-3 border-t ${scheme.border} prose dark:prose-invert max-w-none" ${isHexColor ? `style="border-color: ${color};"` : ''}>
+            <div class="spoiler-content mt-3 pt-3 border-t ${scheme.border} prose dark:prose-invert max-w-none [&_table]:my-4 [&_table]:border-collapse [&_table]:w-full [&_th]:border [&_th]:p-2 [&_td]:border [&_td]:p-2" ${isHexColor ? `style="border-color: ${color};"` : ''}>
               ${renderedContent}
             </div>
           </details>

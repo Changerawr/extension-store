@@ -1,9 +1,9 @@
 {
   "name": "spoiler",
   "displayName": "Spoiler Block",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "author": "changerawr",
-  "description": "Add collapsible spoiler blocks with customizable titles, colors, and icons. Supports named colors, hex codes, and custom icons!",
+  "description": "Add collapsible spoiler blocks with customizable titles, colors, and icons. Supports named colors, hex codes, custom icons, and tables!",
   "category": "blocks",
   "icon": "Eye",
   "files": {
