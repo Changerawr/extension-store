@@ -25,10 +25,25 @@ Major plot details revealed here!
 :::
 ```
 
-### Hex Color Support (New!)
+### Hex Color Support
 ```markdown
 :::spoiler{#ff6b6b} Custom Color
 Use any hex color for fully custom themes!
+:::
+```
+
+### Custom Icon (New!)
+```markdown
+:::spoiler{red}[🚨] Critical Alert
+You can set any emoji as the icon!
+:::
+
+:::spoiler[🎉] Party Time
+Even without a color, you can customize the icon!
+:::
+
+:::spoiler{#9b59b6}[🌟] Custom Everything
+Combine hex colors with custom icons!
 :::
 ```
 
@@ -49,6 +64,7 @@ Available colors with their icons:
 - **Customizable Titles**: Set your own summary text
 - **Color Schemes**: 6 built-in color themes with distinct icons
 - **Hex Color Support**: Use any custom hex color (e.g., `#ff6b6b`)
+- **Custom Icons**: Override the default icon with any emoji (e.g., `[🚨]`, `[🎉]`, `[🌟]`)
 - **Smooth Animations**: Arrow rotates 90° when opening/closing
 - **Dark Mode**: All colors have dark mode variants
 - **Accessibility**: Proper semantic HTML with `<details>` and `<summary>`
@@ -81,6 +97,18 @@ You can nest **any markdown** including:
 - [Links](https://example.com)
 - `code snippets`
 - And more!
+:::
+
+:::spoiler{red}[🚨] Critical Warning
+Custom icon examples with colors!
+:::
+
+:::spoiler[🎉] Celebration
+Custom icon without a color theme.
+:::
+
+:::spoiler{#9b59b6}[🌟] Premium Feature
+Combine custom hex colors with custom icons for ultimate customization!
 :::
 ```
 

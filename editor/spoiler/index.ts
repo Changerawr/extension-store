@@ -4,9 +4,9 @@ import { spoilerToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'spoiler',
     displayName: 'Spoiler Block',
-    version: '1.0.6',
+    version: '1.0.9',
     author: 'changerawr',
-    description: 'Add collapsible spoiler blocks with customizable titles and colors. Supports named colors and hex codes!',
+    description: 'Add collapsible spoiler blocks with customizable titles, colors, and icons. Supports named colors, hex codes, and custom icons!',
     category: 'blocks',
     isBuiltIn: false,
     toolbar: spoilerToolbar,
@@ -18,17 +18,18 @@ export const spoilerExtension: Extension = {
     parseRules: [
         {
             name: 'spoiler',
-            // Pattern supports: :::spoiler or :::spoiler Title or :::spoiler{color} Title
-            pattern: /:::spoiler(?:\{([^}]+)\})?(?: ([^\n]+))?\n([\s\S]*?)\n:::/,
+            // Pattern supports: :::spoiler or :::spoiler Title or :::spoiler{color} Title or :::spoiler{color}[icon] Title
+            pattern: /:::spoiler(?:\{([^}]+)\})?(?:\[([^\]]+)\])?(?: ([^\n]+))?\n([\s\S]*?)\n:::/,
             recursiveContent: true,  // Enable recursive parsing of markdown inside spoiler
             render: (match: RegExpMatchArray) => {
                 return {
                     type: 'spoiler',
-                    content: match[3]?.trim() || '',
+                    content: match[4]?.trim() || '',
                     raw: match[0] || '',
                     attributes: {
                         color: match[1]?.trim() || 'default',
-                        title: match[2]?.trim() || 'Click to reveal spoiler',
+                        icon: match[2]?.trim() || '',
+                        title: match[3]?.trim() || 'Click to reveal spoiler',
                     }
                 };
             },
@@ -40,6 +41,7 @@ export const spoilerExtension: Extension = {
             render: (token) => {
                 const color = token.attributes?.color || 'default';
                 const title = token.attributes?.title || 'Click to reveal spoiler';
+                const customIcon = token.attributes?.icon || '';
 
                 // Check if color is hex code (starts with #)
                 const isHexColor = typeof color === 'string' && color.startsWith('#');
@@ -109,11 +111,14 @@ export const spoilerExtension: Extension = {
                 const renderedChildren = token.attributes?.renderedChildren as string | undefined;
                 const renderedContent = renderedChildren || token.content;
 
+                // Use custom icon if provided, otherwise use scheme icon
+                const displayIcon = customIcon || scheme.icon;
+
                 return `
           <details class="spoiler-block group border border-dashed ${scheme.border} rounded-lg p-4 my-4 ${scheme.bg} transition-all ${scheme.bgHover}" ${customStyle}>
             <summary class="cursor-pointer ${scheme.text} font-medium select-none flex items-center gap-2">
               <span class="spoiler-icon transition-transform inline-block duration-200 group-open:rotate-90">▶</span>
-              <span class="text-lg" role="img" aria-label="spoiler">${scheme.icon}</span>
+              <span class="text-lg" role="img" aria-label="spoiler">${displayIcon}</span>
               <span>${title}</span>
             </summary>
             <div class="spoiler-content mt-3 pt-3 border-t ${scheme.border} prose dark:prose-invert max-w-none" ${isHexColor ? `style="border-color: ${color};"` : ''}>

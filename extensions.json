@@ -5,12 +5,13 @@
       "name": "spoiler",
       "displayName": "Spoiler Block",
       "author": "changerawr",
-      "description": "Add collapsible spoiler blocks with markdown support",
+      "description": "Add collapsible spoiler blocks with customizable titles, colors, and icons. Supports named colors, hex codes, and custom icons!",
       "category": "blocks",
       "path": "editor/spoiler",
       "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/spoiler",
-      "version": "1.0.8",
-      "featured": false
+      "version": "1.0.9",
+      "featured": false,
+      "icon": "Eye"
     },
     {
       "name": "highlight",
