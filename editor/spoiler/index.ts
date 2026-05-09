@@ -4,7 +4,7 @@ import { spoilerToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'spoiler',
     displayName: 'Spoiler Block',
-    version: '1.0.5',
+    version: '1.0.6',
     author: 'changerawr',
     description: 'Add collapsible spoiler blocks with customizable titles and colors. Supports named colors and hex codes!',
     category: 'blocks',

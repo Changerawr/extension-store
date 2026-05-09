@@ -1,5 +1,5 @@
 import type { ExtensionToolbar } from '@changerawr/markdown';
-import { HighlightPopover } from './HighlightPopover';
+import { HighlightPopover } from './components/HighlightPopover';
 
 export const highlightToolbar: ExtensionToolbar = {
     buttons: [

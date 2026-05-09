@@ -1,8 +1,20 @@
 {
   "name": "spoiler",
   "displayName": "Spoiler Block",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "changerawr",
   "description": "Add collapsible spoiler blocks",
-  "category": "blocks"
+  "category": "blocks",
+  "files": {
+    "required": [
+      "index.ts",
+      "toolbar.tsx",
+      "extension.json"
+    ],
+    "optional": [
+      "README.md",
+      "icon.png"
+    ],
+    "directories": []
+  }
 }
