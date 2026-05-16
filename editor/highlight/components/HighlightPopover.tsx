@@ -8,17 +8,17 @@ interface HighlightPopoverProps {
 }
 
 const COLOR_PRESETS = [
-  { name: 'Yellow', value: 'yellow', color: '#fef08ab3' },
-  { name: 'Green', value: 'green', color: '#bbf7d0b3' },
-  { name: 'Blue', value: 'blue', color: '#bfdbfeb3' },
-  { name: 'Red', value: 'red', color: '#fecacab3' },
-  { name: 'Purple', value: 'purple', color: '#e9d5ffb3' },
-  { name: 'Pink', value: 'pink', color: '#fbcfe8b3' },
-  { name: 'Orange', value: 'orange', color: '#fed7aab3' },
+  { name: 'Yellow', value: '#fef08a', color: '#fef08a' },
+  { name: 'Green', value: '#bbf7d0', color: '#bbf7d0' },
+  { name: 'Blue', value: '#bfdbfe', color: '#bfdbfe' },
+  { name: 'Red', value: '#fecaca', color: '#fecaca' },
+  { name: 'Purple', value: '#e9d5ff', color: '#e9d5ff' },
+  { name: 'Pink', value: '#fbcfe8', color: '#fbcfe8' },
+  { name: 'Orange', value: '#fed7aa', color: '#fed7aa' },
 ];
 
 export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
-  const [selectedColor, setSelectedColor] = useState('yellow');
+  const [selectedColor, setSelectedColor] = useState('#fef08a');
   const [customColor, setCustomColor] = useState('#ff6b6b');
   const [isPickingCustomColor, setIsPickingCustomColor] = useState(false);
   const colorInputRef = useRef<HTMLInputElement>(null);
@@ -33,13 +33,12 @@ export function HighlightPopover({ textarea, onClose }: HighlightPopoverProps) {
     let syntax = '';
 
     if (colorToUse === 'custom') {
-      // Custom hex color
       syntax = `=={${customColor}}${placeholder}==`;
-    } else if (colorToUse === 'yellow') {
-      // Default yellow (no color specified)
+    } else if (colorToUse === '#fef08a') {
+      // Default yellow - no braces needed
       syntax = `==${placeholder}==`;
     } else {
-      // Named color
+      // Any other hex color
       syntax = `=={${colorToUse}}${placeholder}==`;
     }
 

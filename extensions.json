@@ -17,11 +17,11 @@
       "name": "highlight",
       "displayName": "Text Highlighter",
       "author": "changerawr",
-      "description": "Highlight important text with customizable colors. Supports 7 preset colors and custom hex codes with improved color picker UX!",
+      "description": "Highlight text with hex colors. Pick from 7 presets or choose any custom color.",
       "category": "formatting",
       "path": "editor/highlight",
       "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/highlight",
-      "version": "1.2.6",
+      "version": "1.2.7",
       "featured": true,
       "icon": "Highlighter"
     }
