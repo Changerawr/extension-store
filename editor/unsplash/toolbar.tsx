@@ -17,7 +17,7 @@ export const unsplashToolbar: ExtensionToolbar = {
   customUI: [
     {
       buttonId: 'unsplash',
-      type: 'popover',
+      type: 'modal',
       component: UnsplashBrowser,
     },
   ],

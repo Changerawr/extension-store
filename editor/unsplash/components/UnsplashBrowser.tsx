@@ -325,7 +325,7 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
   // Show loading state while fetching settings
   if (loadingSettings) {
     return (
-      <div className="w-[1200px] h-[650px] flex items-center justify-center bg-background rounded-lg shadow-xl border">
+      <div className="flex items-center justify-center h-[600px]">
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
           <p className="text-sm text-muted-foreground">Loading extension settings...</p>
@@ -337,7 +337,7 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
   // Show error state if no API key configured
   if (!apiKey) {
     return (
-      <div className="w-[1200px] h-[650px] flex items-center justify-center bg-background rounded-lg shadow-xl border">
+      <div className="flex items-center justify-center h-[600px]">
         <div className="text-center space-y-4 max-w-md px-6">
           <div className="flex justify-center">
             <div className="rounded-full bg-muted p-3">
@@ -362,7 +362,7 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
   }
 
   return (
-    <div className="w-[1200px] h-[650px] flex flex-col bg-background rounded-lg shadow-xl border">
+    <div className="flex flex-col h-full">
       {/* Search Header */}
       <div className="p-4 border-b shrink-0">
         <form onSubmit={handleSearch} className="relative">
@@ -377,8 +377,8 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
         </form>
       </div>
 
-      {/* Content Area - Fixed height to show ~6 images (2 cols × 3 rows) */}
-      <div ref={scrollContainerRef} className="overflow-y-auto p-4" style={{ height: '580px' }}>
+      {/* Content Area - Flex grow to fill available space */}
+      <div ref={scrollContainerRef} className="overflow-y-auto p-4 flex-1">
         {loading && (
           <div className="flex items-center justify-center h-full">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
@@ -399,7 +399,7 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
 
         {!loading && !error && images.length > 0 && (
           <>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-4 gap-4">
               {images.map((image) => (
                 <button
                   key={image.id}
