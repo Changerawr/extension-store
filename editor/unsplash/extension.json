@@ -1,7 +1,7 @@
 {
   "name": "unsplash",
   "displayName": "Unsplash Images",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "changerawr",
   "description": "Browse and insert high-quality images from Unsplash directly into your markdown. Requires free Unsplash API key.",
   "category": "media",
@@ -24,8 +24,8 @@
   "settings": [
     {
       "key": "apiKey",
-      "label": "Unsplash API Key",
-      "description": "Your Unsplash API Access Key. Get one free at https://unsplash.com/developers - will be encrypted when stored",
+      "label": "**Unsplash API Key**",
+      "description": "Your Unsplash API Access Key. Get one free at [unsplash.com/developers](https://unsplash.com/developers) - **will be encrypted** when stored",
       "type": "string",
       "defaultValue": "",
       "required": true,
@@ -33,8 +33,8 @@
     },
     {
       "key": "defaultSize",
-      "label": "Default Image Size",
-      "description": "Default size for inserted images",
+      "label": "**Default Image Size**",
+      "description": "Choose the default size for images inserted into your markdown",
       "type": "select",
       "defaultValue": "regular",
       "options": [
@@ -46,8 +46,8 @@
     },
     {
       "key": "includeAttribution",
-      "label": "Include Photo Attribution",
-      "description": "Add photographer credit as caption (required by Unsplash guidelines) - if you have Unsplash+  you can turn this off",
+      "label": "**Include Photo Attribution**",
+      "description": "Add photographer credit as caption (*required* by [Unsplash guidelines](https://unsplash.com/license)) - if you have **Unsplash+** you can turn this off",
       "type": "boolean",
       "defaultValue": true
     }
