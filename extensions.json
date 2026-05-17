@@ -24,6 +24,18 @@
       "version": "1.2.7",
       "featured": true,
       "icon": "Highlighter"
+    },
+    {
+      "name": "unsplash",
+      "displayName": "Unsplash Images",
+      "author": "changerawr",
+      "description": "Browse and insert high-quality images from Unsplash directly into your markdown. Requires free Unsplash API key.",
+      "category": "media",
+      "path": "editor/unsplash",
+      "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/unsplash",
+      "version": "1.0.0",
+      "featured": false,
+      "icon": "Image"
     }
   ]
 }
