@@ -1,7 +1,7 @@
 {
   "name": "unsplash",
   "displayName": "Unsplash Images",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "author": "changerawr",
   "description": "Browse and insert high-quality images from Unsplash directly into your markdown. Requires free Unsplash API key.",
   "category": "media",
@@ -32,16 +32,16 @@
       "placeholder": "Enter your Unsplash Access Key"
     },
     {
-      "key": "defaultSize",
-      "label": "**Default Image Size**",
-      "description": "Choose the default size for images inserted into your markdown",
+      "key": "imageSize",
+      "label": "**Image Quality & Size**",
+      "description": "Controls both the downloaded image quality from Unsplash and the display size in your markdown",
       "type": "select",
-      "defaultValue": "regular",
+      "defaultValue": "800",
       "options": [
-        { "label": "Thumbnail (200px)", "value": "thumb" },
-        { "label": "Small (400px)", "value": "small" },
-        { "label": "Regular (1080px)", "value": "regular" },
-        { "label": "Full Resolution", "value": "full" }
+        { "label": "Small (400px)", "value": "400" },
+        { "label": "Medium (800px)", "value": "800" },
+        { "label": "Large (1200px)", "value": "1200" },
+        { "label": "Extra Large (1600px)", "value": "1600" }
       ]
     },
     {

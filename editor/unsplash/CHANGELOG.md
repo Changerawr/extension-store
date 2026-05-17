@@ -2,6 +2,25 @@
 
 All notable changes to the Unsplash Images extension will be documented in this file.
 
+## [1.2.0] - 2026-05-17
+
+### Changed
+- **BREAKING**: Simplified settings structure - replaced `defaultSize` and `displayWidth` with single unified `imageSize` setting
+- Image size now controls both download quality and display size using Unsplash's dynamic image API
+- Enhanced image markdown syntax: `![alt](url "caption"){width=800 align=center}`
+- Improved UI layout: 1200px × 650px modal with 3-column grid
+- Better infinite scroll implementation with proper loading states
+
+### Added
+- Dynamic image resizing via Unsplash API: `?w={width}&q=80&fm=jpg&fit=max`
+- Hover-only author attribution for cleaner image grid
+- Support for built-in image extension enhancements (captions, sizing, alignment)
+
+### Technical
+- Uses `urls.raw` with dynamic width parameter for exact size control
+- Single setting now controls both quality and display dimensions
+- Improved settings caching for better performance
+
 ## [1.1.2] - 2026-05-17
 
 ### Fixed

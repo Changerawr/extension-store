@@ -4,7 +4,7 @@ import { unsplashToolbar } from './toolbar';
 export const metadata = {
   name: 'unsplash',
   displayName: 'Unsplash Images',
-  version: '1.1.2',
+  version: '1.2.0',
   author: 'changerawr',
   description: 'Browse and insert high-quality images from Unsplash directly into your markdown. Requires free Unsplash API key.',
   category: 'media',
