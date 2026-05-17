@@ -33,7 +33,7 @@
       "category": "media",
       "path": "editor/unsplash",
       "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/unsplash",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "featured": false,
       "icon": "Image"
     }
