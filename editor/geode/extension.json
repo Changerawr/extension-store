@@ -1,0 +1,23 @@
+{
+  "name": "geode",
+  "displayName": "GeodeMD",
+  "version": "1.0.0",
+  "author": "changerawr",
+  "description": "Geometry Dash color tags and formatting for Geode mod documentation and level descriptions.",
+  "category": "formatting",
+  "icon": "Sparkles",
+  "invertIcon": true,
+  "files": {
+    "required": [
+      "index.ts",
+      "extension.json",
+      "toolbar.tsx"
+    ],
+    "optional": [
+      "README.md",
+      "CHANGELOG.md",
+      "icon.png"
+    ],
+    "directories": ["components"]
+  }
+}

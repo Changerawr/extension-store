@@ -50,6 +50,7 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [selectedImages, setSelectedImages] = useState<Set<string>>(new Set());
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   console.log('[UnsplashBrowser] Props:', { settings, extensionName, extensionId });
@@ -270,7 +271,7 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
         loadFeaturedImages(nextPage, true);
       }
     }
-  }, [loading, loadingMore, hasMore, page, query, apiKey]);
+  }, [loading, loadingMore, hasMore, page, query, apiKey, searchImages, loadFeaturedImages]);
 
   // Attach scroll listener
   useEffect(() => {
@@ -281,31 +282,53 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
     return () => container.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  const insertImage = (image: UnsplashImage) => {
+  const handleImageClick = (image: UnsplashImage, event: React.MouseEvent) => {
+    // Multi-select with Ctrl/Cmd key
+    if (event.ctrlKey || event.metaKey) {
+      setSelectedImages(prev => {
+        const newSet = new Set(prev);
+        if (newSet.has(image.id)) {
+          newSet.delete(image.id);
+        } else {
+          newSet.add(image.id);
+        }
+        return newSet;
+      });
+    } else {
+      // Single select - insert immediately
+      insertImages([image]);
+    }
+  };
+
+  const insertImages = (imagesToInsert: UnsplashImage[]) => {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
 
     // Parse imageSize to get width
     const width = parseInt(imageSize, 10);
 
-    // Get the appropriate URL based on size
-    // Use Unsplash's dynamic image resizing with width parameter
-    const baseUrl = image.urls.raw;
-    const imageUrl = `${baseUrl}?w=${width}&q=80&fm=jpg&fit=max`;
+    // Build markdown for all images
+    const markdownParts = imagesToInsert.map(image => {
+      // Get the appropriate URL based on size
+      const baseUrl = image.urls.raw;
+      const imageUrl = `${baseUrl}?w=${width}&q=80&fm=jpg&fit=max`;
 
-    // Build the markdown with enhanced image extension syntax
-    const altText = image.alt_description || 'Image from Unsplash';
+      // Build the markdown with enhanced image extension syntax
+      const altText = image.alt_description || 'Image from Unsplash';
 
-    // Build caption with attribution if enabled
-    let caption = '';
-    if (includeAttribution) {
-      caption = `Photo by [${image.user.name}](${image.user.links.html}?utm_source=changerawr&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=changerawr&utm_medium=referral)`;
-    }
+      // Build caption with attribution if enabled
+      let caption = '';
+      if (includeAttribution) {
+        caption = `Photo by [${image.user.name}](${image.user.links.html}?utm_source=changerawr&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=changerawr&utm_medium=referral)`;
+      }
 
-    // Use enhanced image extension syntax: ![alt](url "caption"){width=800 align=center}
-    let markdown = caption
-      ? `![${altText}](${imageUrl} "${caption}"){width=${width} align=center}`
-      : `![${altText}](${imageUrl}){width=${width} align=center}`;
+      // Use enhanced image extension syntax: ![alt](url "caption"){width=800 align=center}
+      return caption
+        ? `![${altText}](${imageUrl} "${caption}"){width=${width} align=center}`
+        : `![${altText}](${imageUrl}){width=${width} align=center}`;
+    });
+
+    const markdown = markdownParts.join('\n\n');
 
     // Insert into textarea
     const newText =
@@ -320,6 +343,12 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
     textarea.dispatchEvent(new Event('change', { bubbles: true }));
 
     onClose();
+  };
+
+  const handleInsertSelected = () => {
+    if (selectedImages.size === 0) return;
+    const imagesToInsert = images.filter(img => selectedImages.has(img.id));
+    insertImages(imagesToInsert);
   };
 
   // Show loading state while fetching settings
@@ -362,7 +391,7 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-0">
       {/* Search Header */}
       <div className="p-4 border-b shrink-0">
         <form onSubmit={handleSearch} className="relative">
@@ -378,10 +407,14 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
       </div>
 
       {/* Content Area - Flex grow to fill available space */}
-      <div ref={scrollContainerRef} className="overflow-y-auto p-4 flex-1">
-        {loading && (
-          <div className="flex items-center justify-center h-full">
-            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+      <div ref={scrollContainerRef} className="overflow-y-auto overflow-x-hidden p-4 flex-1 min-h-0">
+        {loading && images.length === 0 && (
+          <div className="grid grid-cols-4 gap-4">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="relative aspect-square rounded-lg overflow-hidden bg-muted animate-pulse">
+                <div className="absolute inset-0 bg-gradient-to-br from-muted to-muted/50" />
+              </div>
+            ))}
           </div>
         )}
 
@@ -397,33 +430,48 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
           </div>
         )}
 
-        {!loading && !error && images.length > 0 && (
+        {images.length > 0 && (
           <>
             <div className="grid grid-cols-4 gap-4">
-              {images.map((image) => (
-                <button
-                  key={image.id}
-                  onClick={() => insertImage(image)}
-                  className="relative aspect-square rounded-lg overflow-hidden hover:ring-2 hover:ring-primary transition-all group shadow-md hover:shadow-lg"
-                >
-                  <img
-                    src={image.urls.regular}
-                    alt={image.alt_description || 'Unsplash image'}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="text-sm text-white font-semibold drop-shadow-lg">{image.user.name}</p>
-                  </div>
-                </button>
-              ))}
+              {images.map((image) => {
+                const isSelected = selectedImages.has(image.id);
+                return (
+                  <button
+                    key={image.id}
+                    onClick={(e) => handleImageClick(image, e)}
+                    className={`relative aspect-square rounded-lg overflow-hidden transition-all group shadow-md hover:shadow-lg ${
+                      isSelected ? 'ring-2 ring-primary' : 'hover:ring-2 hover:ring-primary'
+                    }`}
+                  >
+                    <img
+                      src={image.urls.regular}
+                      alt={image.alt_description || 'Unsplash image'}
+                      className="w-full h-full object-cover"
+                    />
+                    {isSelected && (
+                      <div className="absolute top-2 right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <p className="text-sm text-white font-semibold drop-shadow-lg">{image.user.name}</p>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
 
             {/* Loading more indicator */}
             {loadingMore && (
-              <div className="flex items-center justify-center py-6 gap-2">
-                <Loader2 className="h-5 w-5 animate-spin text-primary" />
-                <span className="text-sm text-muted-foreground">Loading more...</span>
+              <div className="grid grid-cols-4 gap-4 mt-4">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div key={`skeleton-${i}`} className="relative aspect-square rounded-lg overflow-hidden bg-muted animate-pulse">
+                    <div className="absolute inset-0 bg-gradient-to-br from-muted to-muted/50" />
+                  </div>
+                ))}
               </div>
             )}
 
@@ -438,18 +486,33 @@ export function UnsplashBrowser({ textarea, onClose, settings, extensionName, ex
       </div>
 
       {/* Footer */}
-      <div className="px-4 py-2 border-t bg-muted/30 text-center shrink-0">
-        <p className="text-xs text-muted-foreground">
-          Powered by{' '}
-          <a
-            href="https://unsplash.com/?utm_source=changerawr&utm_medium=referral"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:underline font-medium"
-          >
-            Unsplash
-          </a>
-        </p>
+      <div className="px-4 py-4 flex items-center justify-between shrink-0 gap-3">
+        {selectedImages.size > 0 ? (
+          <>
+            <p className="text-xs text-muted-foreground whitespace-nowrap">
+              {selectedImages.size} image{selectedImages.size !== 1 ? 's' : ''} selected
+            </p>
+            <button
+              onClick={handleInsertSelected}
+              className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors whitespace-nowrap flex-shrink-0"
+            >
+              Insert Selected
+            </button>
+          </>
+        ) : (
+          <p className="text-xs text-muted-foreground w-full">
+            Powered by{' '}
+            <a
+              href="https://unsplash.com/?utm_source=changerawr&utm_medium=referral"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline font-medium"
+            >
+              Unsplash
+            </a>
+            {' • Click to insert, Ctrl+Click to select multiple'}
+          </p>
+        )}
       </div>
     </div>
   );

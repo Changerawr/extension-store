@@ -5,7 +5,7 @@ export const unsplashToolbar: ExtensionToolbar = {
   buttons: [
     {
       id: 'unsplash',
-      icon: 'Image',
+      icon: 'ExtensionIcon',
       tooltip: 'Insert Unsplash Image',
       group: 'media',
       onClick: (textarea) => {
