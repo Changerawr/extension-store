@@ -1,7 +1,7 @@
 {
   "name": "unsplash",
   "displayName": "Unsplash Images",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "changerawr",
   "description": "Browse and insert high-quality images from Unsplash directly into your markdown. Requires free Unsplash API key.",
   "category": "media",
@@ -47,7 +47,7 @@
     {
       "key": "includeAttribution",
       "label": "Include Photo Attribution",
-      "description": "Add photographer credit as caption (required by Unsplash guidelines)",
+      "description": "Add photographer credit as caption (required by Unsplash guidelines) - if you have Unsplash+  you can turn this off",
       "type": "boolean",
       "defaultValue": true
     }

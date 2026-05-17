@@ -1,4 +1,5 @@
 import type { Extension } from '@changerawr/markdown';
+import { unsplashToolbar } from './toolbar';
 
 export const metadata = {
   name: 'unsplash',
@@ -9,6 +10,7 @@ export const metadata = {
   category: 'media',
   icon: 'Image',
   isBuiltIn: false,
+  toolbar: unsplashToolbar,
 };
 
 /**
