@@ -1,0 +1,19 @@
+# Changelog
+
+## [1.0.0] - 2026-05-16
+
+### Added
+- Initial release of Highlight Block extension
+- 6 different highlight block types (info, warning, success, error, tip, note)
+- Each type with unique colors, icons, and styling
+- Dark mode support with automatic color adjustments
+- Responsive design for all screen sizes
+- Tailwind CSS integration
+
+### Features
+- Simple `:::highlight type="TYPE"` syntax
+- Icon support for each block type
+- Supports nested markdown content
+- Beautiful gradient backgrounds
+- Border styling for visual hierarchy
+- Prose styling for content readability
