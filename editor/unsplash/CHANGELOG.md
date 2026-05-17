@@ -2,6 +2,17 @@
 
 All notable changes to the Unsplash Images extension will be documented in this file.
 
+## [1.1.2] - 2026-05-17
+
+### Fixed
+- Fixed 404 error when fetching extension settings from toolbar
+- Settings now properly retrieved using extension database ID instead of name lookup
+
+### Technical
+- Simplified settings fetching to use direct extensionId prop
+- Removed unnecessary two-step lookup (name → ID → settings)
+- More efficient API usage with single request instead of two
+
 ## [1.1.0] - 2026-05-17
 
 ### Fixed

@@ -12,6 +12,7 @@ interface UnsplashBrowserProps {
     includeAttribution?: boolean;
   };
   extensionName?: string;
+  extensionId?: string;
 }
 
 interface UnsplashImage {
@@ -35,31 +36,23 @@ interface UnsplashImage {
   };
 }
 
-export function UnsplashBrowser({ textarea, onClose, settings, extensionName }: UnsplashBrowserProps) {
+export function UnsplashBrowser({ textarea, onClose, settings, extensionName, extensionId }: UnsplashBrowserProps) {
   const [query, setQuery] = useState('');
   const [images, setImages] = useState<UnsplashImage[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fetchedSettings, setFetchedSettings] = useState<typeof settings | null>(null);
 
-  // Fetch settings from API if not provided and we have an extension name
+  // Fetch settings from API if not provided and we have an extension ID
   useEffect(() => {
-    if ((!settings || !settings.apiKey) && extensionName) {
-      // First get the extension by name to get its ID
-      fetch(`/api/extensions`)
-        .then(res => res.json())
-        .then(extensions => {
-          const extension = extensions.find((ext: any) => ext.name === extensionName);
-          if (extension?.id) {
-            return fetch(`/api/extensions/${extension.id}/settings`);
-          }
-          throw new Error('Extension not found');
-        })
+    if ((!settings || !settings.apiKey) && extensionId) {
+      // Directly fetch settings using the extension ID
+      fetch(`/api/extensions/${extensionId}/settings`)
         .then(res => res.json())
         .then(data => setFetchedSettings(data.settings || data))
         .catch(err => console.error('Failed to fetch extension settings:', err));
     }
-  }, [settings, extensionName]);
+  }, [settings, extensionId]);
 
   const effectiveSettings = settings?.apiKey ? settings : fetchedSettings;
   const defaultSize = effectiveSettings?.defaultSize || 'regular';
