@@ -1,0 +1,55 @@
+{
+  "name": "unsplash",
+  "displayName": "Unsplash Images",
+  "version": "1.0.0",
+  "author": "changerawr",
+  "description": "Browse and insert high-quality images from Unsplash directly into your markdown. Requires free Unsplash API key.",
+  "category": "media",
+  "icon": "Image",
+  "files": {
+    "required": [
+      "index.ts",
+      "toolbar.tsx",
+      "extension.json"
+    ],
+    "optional": [
+      "README.md",
+      "CHANGELOG.md",
+      "icon.png"
+    ],
+    "directories": [
+      "components"
+    ]
+  },
+  "settings": [
+    {
+      "key": "apiKey",
+      "label": "Unsplash API Key",
+      "description": "Your Unsplash API Access Key. Get one free at https://unsplash.com/developers - will be encrypted when stored",
+      "type": "string",
+      "defaultValue": "",
+      "required": true,
+      "placeholder": "Enter your Unsplash Access Key"
+    },
+    {
+      "key": "defaultSize",
+      "label": "Default Image Size",
+      "description": "Default size for inserted images",
+      "type": "select",
+      "defaultValue": "regular",
+      "options": [
+        { "label": "Thumbnail (200px)", "value": "thumb" },
+        { "label": "Small (400px)", "value": "small" },
+        { "label": "Regular (1080px)", "value": "regular" },
+        { "label": "Full Resolution", "value": "full" }
+      ]
+    },
+    {
+      "key": "includeAttribution",
+      "label": "Include Photo Attribution",
+      "description": "Add photographer credit as caption (required by Unsplash guidelines)",
+      "type": "boolean",
+      "defaultValue": true
+    }
+  ]
+}
