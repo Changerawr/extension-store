@@ -1,7 +1,7 @@
 {
   "name": "geode",
   "displayName": "GeodeMD",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "changerawr",
   "description": "Geometry Dash color tags and formatting for Geode mod documentation and level descriptions.",
   "category": "formatting",

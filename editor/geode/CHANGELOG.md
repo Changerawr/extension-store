@@ -2,9 +2,25 @@
 
 All notable changes to the GeodeMD extension will be documented in this file.
 
+## [1.0.2] - 2026-05-18
+
+### Changed
+- Complete redesign of UI with clean, professional color picker
+- Simplified modal to single-purpose color tag insertion
+- Improved color tag rendering with proper matching tags
+- Better live preview with actual color display
+- Removed broken features (badges, links) to focus on core functionality
+- Updated documentation to reflect simplified approach
+
+### Fixed
+- Color tags now properly render in preview
+- Fixed parsing to use matching tags instead of universal closing tag
+- Improved UI layout and spacing
+- Better visual feedback for selected colors
+
 ## [1.0.1] - 2026-05-17
 
-## Fixes
+### Fixes
 - Fixed an issue in which toolbar object was not registered
 
 ## [1.0.0] - 2026-05-17
