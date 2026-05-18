@@ -4,12 +4,13 @@ import { unsplashToolbar } from './toolbar';
 export const metadata = {
   name: 'unsplash',
   displayName: 'Unsplash Images',
-  version: '1.3.0',
+  version: '1.3.1',
   author: 'changerawr',
   description: 'Browse and insert high-quality images from Unsplash directly into your markdown. Requires free Unsplash API key.',
   category: 'media',
   icon: 'Image',
   isBuiltIn: false,
+  invertIcon: true,
   toolbar: unsplashToolbar,
 };
 
