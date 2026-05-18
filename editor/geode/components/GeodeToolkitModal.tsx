@@ -89,15 +89,15 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
     };
 
     const handleColorClick = (tag: string) => {
-        const colorMarkdown = `<${tag}>text</${tag === 'c' ? 'c' : 'c'}>`;
+        const colorMarkdown = `<${tag}>text</c>`;
         onInsert(colorMarkdown);
         onClose();
     };
 
     return (
-        <div className="flex flex-col h-full max-h-[600px]">
+        <div className="w-full">
             {/* Header */}
-            <div className="p-6 pb-0">
+            <div className="px-6 pt-6 pb-4">
                 <h3 className="text-lg font-semibold mb-1">GeodeMD Toolkit</h3>
                 <p className="text-sm text-muted-foreground">
                     Badges, links, and color tags for Geometry Dash content
@@ -105,10 +105,10 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-1 px-6 pt-4 border-b">
+            <div className="flex gap-2 px-6 border-b">
                 <button
                     onClick={() => setActiveTab('badges')}
-                    className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
                         activeTab === 'badges'
                             ? 'border-primary text-primary'
                             : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -118,7 +118,7 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                 </button>
                 <button
                     onClick={() => setActiveTab('links')}
-                    className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
                         activeTab === 'links'
                             ? 'border-primary text-primary'
                             : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -128,7 +128,7 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                 </button>
                 <button
                     onClick={() => setActiveTab('colors')}
-                    className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
                         activeTab === 'colors'
                             ? 'border-primary text-primary'
                             : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -139,7 +139,7 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="px-6 py-6 max-h-[500px] overflow-y-auto">
                 {activeTab === 'badges' && (
                     <div className="space-y-4">
                         <div className="space-y-2">
@@ -149,7 +149,7 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                                 value={modId}
                                 onChange={(e) => setModId(e.target.value)}
                                 placeholder="com.example.mymod"
-                                className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                                className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                             />
                         </div>
 
@@ -165,9 +165,9 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                                             type="checkbox"
                                             checked={selectedBadges.has(badge.id)}
                                             onChange={() => toggleBadge(badge.id)}
-                                            className="mt-1 w-4 h-4 rounded border-input"
+                                            className="mt-0.5 w-4 h-4 rounded border-input flex-shrink-0"
                                         />
-                                        <div className="flex-1">
+                                        <div className="flex-1 min-w-0">
                                             <div className="font-medium text-sm">{badge.name}</div>
                                             <div className="text-xs text-muted-foreground">{badge.description}</div>
                                         </div>
@@ -193,9 +193,9 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                                             name="linkType"
                                             checked={linkType === type.protocol}
                                             onChange={() => setLinkType(type.protocol)}
-                                            className="mt-1 w-4 h-4"
+                                            className="mt-0.5 w-4 h-4 flex-shrink-0"
                                         />
-                                        <div className="flex-1">
+                                        <div className="flex-1 min-w-0">
                                             <div className="font-medium text-sm">{type.name}</div>
                                             <div className="text-xs text-muted-foreground">{type.description}</div>
                                         </div>
@@ -211,7 +211,7 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                                 value={linkText}
                                 onChange={(e) => setLinkText(e.target.value)}
                                 placeholder="Click here"
-                                className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                                className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                             />
                         </div>
 
@@ -224,11 +224,11 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                                 value={linkId}
                                 onChange={(e) => setLinkId(e.target.value)}
                                 placeholder={LINK_TYPES.find(t => t.protocol === linkType)?.placeholder}
-                                className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                                className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                             />
                         </div>
 
-                        <div className="text-xs text-muted-foreground bg-accent/30 p-3 rounded-md">
+                        <div className="text-xs text-muted-foreground bg-accent/30 p-3 rounded-md break-all">
                             Preview: <code className="bg-background px-2 py-0.5 rounded">[{linkText || 'text'}]({linkType}:{linkId || 'id'})</code>
                         </div>
                     </div>
@@ -237,7 +237,7 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                 {activeTab === 'colors' && (
                     <div className="space-y-4">
                         <p className="text-sm text-muted-foreground">
-                            Click a color to insert its tag. Use <code className="bg-accent px-1.5 py-0.5 rounded text-xs">&lt;/c&gt;</code> to close.
+                            Click a color to insert. Close with <code className="bg-accent px-1.5 py-0.5 rounded text-xs">&lt;/c&gt;</code>
                         </p>
                         <div className="grid grid-cols-2 gap-2">
                             {COLORS.map(color => (
@@ -251,7 +251,7 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
                                         style={{ backgroundColor: color.color }}
                                     />
                                     <div className="flex-1 min-w-0">
-                                        <div className="font-medium text-sm">{color.name}</div>
+                                        <div className="font-medium text-sm truncate">{color.name}</div>
                                         <div className="text-xs text-muted-foreground font-mono">&lt;{color.tag}&gt;</div>
                                     </div>
                                 </button>
@@ -265,10 +265,10 @@ export function GeodeToolkitModal({ onInsert, onClose }: ModalComponentProps) {
             </div>
 
             {/* Footer */}
-            <div className="flex justify-end gap-2 p-6 pt-0 border-t">
+            <div className="flex justify-end gap-3 px-6 py-4 border-t bg-muted/30">
                 <button
                     onClick={onClose}
-                    className="px-4 py-2 text-sm rounded-md hover:bg-accent transition-colors"
+                    className="px-4 py-2 text-sm rounded-md border border-input hover:bg-accent transition-colors"
                 >
                     Cancel
                 </button>
