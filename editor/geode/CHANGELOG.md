@@ -2,6 +2,33 @@
 
 All notable changes to the GeodeMD extension will be documented in this file.
 
+## [1.0.3] - 2026-05-18
+
+### Added
+- **Complete UI Redesign** - Professional 3-tab toolkit interface
+- **GD Links Tab** - Create clickable links with `user:`, `level:`, and `mod:` protocols
+- **Geode Badges Tab** - Insert dynamic API-powered status badges
+- **Link Transformation** - Automatic URL conversion for custom protocols
+- **Multi-Select Badges** - Select and insert multiple badges at once
+- **Live Link Preview** - See actual URLs before inserting
+- **Badge Preview** - Visual preview of selected badge markdown
+- **Tab Navigation** - Organized interface with Color Tags, GD Links, and Geode Badges tabs
+- **Enhanced UI Components** - Grid layouts, selection indicators, hover states
+
+### Changed
+- Completely redesigned modal UI to match Unsplash extension quality
+- Improved color picker with better visual feedback and spacing
+- Enhanced live preview with better formatting
+- Better button states and transitions
+- More professional layout with proper scrolling
+- Updated description to reflect all features
+
+### Fixed
+- Links now properly clickable and redirect to GDBrowser/Geode SDK
+- Color tags render correctly in preview
+- UI now properly uses screen space without clutter
+- All features now fully functional (colors, links, badges)
+
 ## [1.0.2] - 2026-05-18
 
 ### Changed

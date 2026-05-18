@@ -4,9 +4,9 @@ import { geodeToolbar } from './toolbar';
 export const metadata = {
   name: 'geode',
   displayName: 'GeodeMD',
-  version: '1.0.3',
+  version: '1.0.4',
   author: 'changerawr',
-  description: 'Geometry Dash color tags for markdown with live preview and easy insertion.',
+  description: 'Geometry Dash color tags, clickable GD links, and Geode API badges for markdown.',
   category: 'formatting',
   icon: 'Sparkles',
   invertIcon: true,
@@ -32,10 +32,12 @@ const GD_COLORS: Record<string, string> = {
 };
 
 /**
- * GeodeMD Extension - Geometry Dash Color Tags
+ * GeodeMD Extension - Geometry Dash Enhancements
  *
- * Syntax: <TAG>content</TAG>
- * Where TAG is one of: cb, cg, cl, cj, cy, co, cr, cp, ca, cd, cc, cf, cs, c_
+ * Features:
+ * 1. Color Tags: <cb>text</cb>
+ * 2. GD Links: [text](user:username), [text](level:id), [text](mod:id)
+ * 3. Geode Badges: ![badge](https://api.geode-sdk.org/v1/mods/mod.id/badges/badge)
  */
 export const geodeExtension: Extension = {
   name: 'geode',
@@ -82,4 +84,43 @@ export const geodeExtension: Extension = {
       },
     },
   ],
+
+  // Transform custom protocols (user:, level:, mod:) to actual URLs
+  transformLink: (href: string, title?: string) => {
+    // Match user:username
+    if (href.startsWith('user:')) {
+      const username = href.slice(5);
+      return {
+        href: `https://gdbrowser.com/u/${username}`,
+        title: title || `GD User: ${username}`,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      };
+    }
+
+    // Match level:id
+    if (href.startsWith('level:')) {
+      const levelId = href.slice(6);
+      return {
+        href: `https://gdbrowser.com/${levelId}`,
+        title: title || `GD Level: ${levelId}`,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      };
+    }
+
+    // Match mod:id
+    if (href.startsWith('mod:')) {
+      const modId = href.slice(4);
+      return {
+        href: `https://geode-sdk.org/mods/${modId}`,
+        title: title || `Geode Mod: ${modId}`,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      };
+    }
+
+    // Return unchanged for other links
+    return { href, title };
+  },
 };
