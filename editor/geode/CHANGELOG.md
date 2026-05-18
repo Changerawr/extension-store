@@ -2,6 +2,11 @@
 
 All notable changes to the GeodeMD extension will be documented in this file.
 
+## [1.0.1] - 2026-05-17
+
+## Fixes
+- Fixed an issue in which toolbar object was not registered
+
 ## [1.0.0] - 2026-05-17
 
 ### Added

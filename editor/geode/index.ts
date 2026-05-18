@@ -1,4 +1,5 @@
 import type { Extension } from '@changerawr/markdown';
+import { geodeToolbar } from './toolbar';
 
 export const metadata = {
   name: 'geode',
@@ -10,6 +11,7 @@ export const metadata = {
   icon: 'Sparkles',
   invertIcon: true,
   isBuiltIn: false,
+  toolbar: geodeToolbar,
 };
 
 /**
