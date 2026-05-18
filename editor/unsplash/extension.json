@@ -6,6 +6,7 @@
   "description": "Browse and insert high-quality images from Unsplash directly into your markdown. Requires free Unsplash API key.",
   "category": "media",
   "icon": "Image",
+  "invertIcon": true,
   "files": {
     "required": [
       "index.ts",
