@@ -23,8 +23,10 @@ export const highlightExtension: Extension = {
                 return {
                     type: 'highlight',
                     content: match[1] || '',
-                    color: '#fef08a',  // Default yellow
                     raw: match[0] || '',
+                    data: {
+                        color: '#fef08a',  // Default yellow
+                    },
                 };
             },
         },
@@ -35,20 +37,29 @@ export const highlightExtension: Extension = {
                 return {
                     type: 'highlight',
                     content: match[2] || '',
-                    color: match[1] || '#fef08a',  // Default yellow
                     raw: match[0] || '',
+                    data: {
+                        color: match[1] || '#fef08a',  // Default yellow
+                    },
                 };
             },
         },
     ],
     renderRules: [
         {
-            type: 'highlight',
+            name: 'highlight',
             render: (token) => {
-                const color = token.color || '#fef08a';  // Default yellow
+                const color = (token.data?.color as string) || '#fef08a';  // Default yellow
 
                 // All colors are now hex codes - simple inline styles
-                return `<mark class="inline-block px-1 rounded transition-colors" style="background-color: ${color}; color: inherit;">${token.content}</mark>`;
+                return {
+                    tagName: 'mark',
+                    attributes: {
+                        class: 'inline-block px-1 rounded transition-colors',
+                        style: `background-color: ${color}; color: inherit;`,
+                    },
+                    content: token.content,
+                };
             },
         },
     ],

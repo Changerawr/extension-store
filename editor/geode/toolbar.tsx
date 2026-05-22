@@ -1,4 +1,4 @@
-import type { ExtensionToolbar } from '@changerawr/markdown';
+import type { ExtensionToolbar } from '@/lib/services/extensions/sdk';
 import { GeodeToolkitModal } from './components/GeodeToolkitModal';
 
 export const geodeToolbar: ExtensionToolbar = {

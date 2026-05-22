@@ -1,5 +1,5 @@
-import type { Extension, ExtensionMetadata } from '@changerawr/markdown';
-import { spoilerToolbar } from './toolbar';
+import type { Extension, ExtensionMetadata } from '@/lib/services/extensions/sdk';
+import { spoilerToolbar } from '@/extensions/changerawr/spoiler/toolbar';
 
 export const metadata: ExtensionMetadata = {
     name: 'spoiler',
@@ -19,14 +19,13 @@ export const spoilerExtension: Extension = {
         {
             name: 'spoiler',
             // Pattern supports: :::spoiler or :::spoiler Title or :::spoiler{color} Title or :::spoiler{color}[icon] Title
-            pattern: /:::spoiler(?:\{([^}]+)\})?(?:\[([^\]]+)\])?(?: ([^\n]+))?\n([\s\S]*?)\n:::/,
-            recursiveContent: true,  // Enable recursive parsing of markdown inside spoiler
+            pattern: /:::spoiler(?:\{([^}]+)\})?(?:\[([^\]]+)\})?(?: ([^\n]+))?\n([\s\S]*?)\n:::/,
             render: (match: RegExpMatchArray) => {
                 return {
                     type: 'spoiler',
                     content: match[4]?.trim() || '',
                     raw: match[0] || '',
-                    attributes: {
+                    data: {
                         color: match[1]?.trim() || 'default',
                         icon: match[2]?.trim() || '',
                         title: match[3]?.trim() || 'Click to reveal spoiler',
@@ -37,11 +36,11 @@ export const spoilerExtension: Extension = {
     ],
     renderRules: [
         {
-            type: 'spoiler',
+            name: 'spoiler',
             render: (token) => {
-                const color = token.attributes?.color || 'default';
-                const title = token.attributes?.title || 'Click to reveal spoiler';
-                const customIcon = token.attributes?.icon || '';
+                const color = (token.data?.color as string) || 'default';
+                const title = (token.data?.title as string) || 'Click to reveal spoiler';
+                const customIcon = (token.data?.icon as string) || '';
 
                 // Check if color is hex code (starts with #)
                 const isHexColor = typeof color === 'string' && color.startsWith('#');
@@ -108,7 +107,7 @@ export const spoilerExtension: Extension = {
                 }
 
                 // Use pre-rendered children from the renderer
-                const renderedChildren = token.attributes?.renderedChildren as string | undefined;
+                const renderedChildren = token.data?.renderedChildren as string | undefined;
                 const renderedContent = renderedChildren || token.content;
 
                 // Use custom icon if provided, otherwise use scheme icon

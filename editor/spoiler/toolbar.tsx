@@ -1,17 +1,17 @@
-import type { ToolbarButton } from '@changerawr/markdown';
-import { Eye } from 'lucide-react';
+import type { ExtensionToolbar } from '@/lib/services/extensions/sdk';
 
-export const spoilerToolbar: ToolbarButton[] = [
-  {
-    id: 'spoiler',
-    icon: Eye,
-    tooltip: 'Insert Spoiler Block',
-    group: 'blocks',
-    action: {
-      type: 'insert',
-      before: ':::spoiler\n',
-      after: '\n:::',
-      placeholder: 'Hidden content goes here',
+export const spoilerToolbar: ExtensionToolbar = {
+  buttons: [
+    {
+      id: 'spoiler',
+      icon: 'Eye',
+      tooltip: 'Insert Spoiler Block',
+      group: 'blocks',
+      action: {
+        before: ':::spoiler\n',
+        after: '\n:::',
+        placeholder: 'Hidden content goes here',
+      },
     },
-  },
-];
+  ],
+};

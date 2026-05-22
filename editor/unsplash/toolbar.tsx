@@ -1,5 +1,5 @@
-import type { ExtensionToolbar } from '@changerawr/markdown';
-import { UnsplashBrowser } from './components/UnsplashBrowser';
+import type { ExtensionToolbar } from '@/lib/services/extensions/sdk';
+import { UnsplashBrowser } from '@/extensions/changerawr/unsplash/components/UnsplashBrowser';
 
 export const unsplashToolbar: ExtensionToolbar = {
   buttons: [

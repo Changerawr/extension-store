@@ -14,8 +14,7 @@
     ],
     "optional": [
       "README.md",
-      "icon.png",
-      "CHANGELOG.md"
+      "icon.png"
     ],
     "directories": []
   }

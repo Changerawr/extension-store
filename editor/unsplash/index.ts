@@ -1,4 +1,4 @@
-import type { Extension } from '@changerawr/markdown';
+import type { Extension } from '@/lib/services/extensions/sdk';
 import { unsplashToolbar } from './toolbar';
 
 export const metadata = {

@@ -2,26 +2,6 @@
 
 All notable changes to the Unsplash Images extension will be documented in this file.
 
-## [1.3.0] - 2026-05-17
-
-### Added
-- **Multi-select support**: Hold Ctrl/Cmd while clicking to select multiple images
-- **Insert Selected** button appears when images are selected to insert all at once
-- Visual selection indicators with checkmarks on selected images
-- Helper text in footer: "Click to insert, Ctrl+Click to select multiple"
-
-### Changed
-- Converted from popover to modal for larger, more spacious UI
-- Increased image grid from 3 to 4 columns
-- Simplified footer: removed background and border, cleaner text-only design
-- Loading spinner no longer takes full height when searching (keeps search bar aligned)
-- Fixed infinite scroll functionality for seamless browsing
-
-### Improved
-- Better UX: Single click inserts immediately, Ctrl+Click for multi-select
-- Multiple images inserted with double line break separation for better markdown formatting
-- Footer dynamically switches between Unsplash attribution and selection info
-
 ## [1.2.0] - 2026-05-17
 
 ### Changed

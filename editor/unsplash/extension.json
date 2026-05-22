@@ -39,10 +39,22 @@
       "type": "select",
       "defaultValue": "800",
       "options": [
-        { "label": "Small (400px)", "value": "400" },
-        { "label": "Medium (800px)", "value": "800" },
-        { "label": "Large (1200px)", "value": "1200" },
-        { "label": "Extra Large (1600px)", "value": "1600" }
+        {
+          "label": "Small (400px)",
+          "value": "400"
+        },
+        {
+          "label": "Medium (800px)",
+          "value": "800"
+        },
+        {
+          "label": "Large (1200px)",
+          "value": "1200"
+        },
+        {
+          "label": "Extra Large (1600px)",
+          "value": "1600"
+        }
       ]
     },
     {
