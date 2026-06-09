@@ -21,7 +21,7 @@
       "category": "formatting",
       "path": "editor/highlight",
       "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/highlight",
-      "version": "1.2.8",
+      "version": "1.2.9",
       "featured": true,
       "icon": "Highlighter"
     },

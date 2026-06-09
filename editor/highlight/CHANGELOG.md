@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.9] - 2026-06-09
+
+### Fixed
+- `render` function was returning an object `{ tagName, attributes, content }` instead of an HTML string, causing `[object Object]` output
+
 ## [1.2.8] - 2026-06-09
 
 ### Fixed
