@@ -4,7 +4,7 @@ import { highlightToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'highlight',
     displayName: 'Text Highlighter',
-    version: '1.2.9',
+    version: '1.3.0',
     author: 'changerawr',
     description: 'Highlight text with hex colors. Pick from 7 presets or choose any custom color.',
     category: 'formatting',
@@ -50,7 +50,7 @@ export const highlightExtension: Extension = {
             type: 'highlight',
             render: (token) => {
                 const color = (token.data?.color as string) || '#fef08a';
-                return `<mark class="inline-block px-1 rounded transition-colors" style="background-color: ${color}; color: inherit;">${token.content}</mark>`;
+                return `<mark style="background-color: ${color}; color: inherit; display: inline; padding: 1px 4px; border-radius: 3px;">${token.content}</mark>`;
             },
         },
     ],

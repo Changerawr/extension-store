@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.0] - 2026-06-09
+
+### Fixed
+- Replaced Tailwind utility classes (`inline-block px-1 rounded`) with inline styles — Tailwind purges classes that only appear in runtime-generated strings, so padding and border-radius were stripped. Now fully self-contained with inline CSS.
+
 ## [1.2.9] - 2026-06-09
 
 ### Fixed
