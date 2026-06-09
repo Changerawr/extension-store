@@ -4,7 +4,7 @@ import { highlightToolbar } from './toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'highlight',
     displayName: 'Text Highlighter',
-    version: '1.2.7',
+    version: '1.2.8',
     author: 'changerawr',
     description: 'Highlight text with hex colors. Pick from 7 presets or choose any custom color.',
     category: 'formatting',
@@ -47,7 +47,7 @@ export const highlightExtension: Extension = {
     ],
     renderRules: [
         {
-            name: 'highlight',
+            type: 'highlight',
             render: (token) => {
                 const color = (token.data?.color as string) || '#fef08a';  // Default yellow
 

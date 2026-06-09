@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.8] - 2026-06-09
+
+### Fixed
+- `renderRules[0]` used `name` instead of the required `type` field, causing "Render rule 0 must have a valid type" registration failure
+
 ## [1.0.0] - 2026-05-16
 
 ### Added
