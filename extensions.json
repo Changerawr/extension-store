@@ -42,7 +42,7 @@
       "name": "geode",
       "displayName": "GeodeMD",
       "author": "changerawr",
-      "description": "Geometry Dash color tags and formatting for Geode mod documentation and level descriptions.",
+      "description": "Geometry Dash color tags, clickable GD links, and Geode API status badges for markdown.",
       "category": "formatting",
       "path": "editor/geode",
       "installUrl": "https://github.com/changerawr/extension-store/tree/main/editor/geode",
