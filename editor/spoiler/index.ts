@@ -4,7 +4,7 @@ import { spoilerToolbar } from '@/extensions/changerawr/spoiler/toolbar';
 export const metadata: ExtensionMetadata = {
     name: 'spoiler',
     displayName: 'Spoiler Block',
-    version: '1.0.10',
+    version: '1.1.0',
     author: 'changerawr',
     description: 'Add collapsible spoiler blocks with customizable titles, colors, and icons. Supports named colors, hex codes, custom icons, and tables!',
     category: 'blocks',
@@ -18,6 +18,7 @@ export const spoilerExtension: Extension = {
     parseRules: [
         {
             name: 'spoiler',
+            scope: 'block',
             // Pattern supports: :::spoiler or :::spoiler Title or :::spoiler{color} Title or :::spoiler{color}[icon] Title
             pattern: /:::spoiler(?:\{([^}]+)\})?(?:\[([^\]]+)\})?(?: ([^\n]+))?\n([\s\S]*?)\n:::/,
             render: (match: RegExpMatchArray) => {
@@ -25,7 +26,7 @@ export const spoilerExtension: Extension = {
                     type: 'spoiler',
                     content: match[4]?.trim() || '',
                     raw: match[0] || '',
-                    data: {
+                    attributes: {
                         color: match[1]?.trim() || 'default',
                         icon: match[2]?.trim() || '',
                         title: match[3]?.trim() || 'Click to reveal spoiler',
@@ -36,11 +37,11 @@ export const spoilerExtension: Extension = {
     ],
     renderRules: [
         {
-            name: 'spoiler',
+            type: 'spoiler',
             render: (token) => {
-                const color = (token.data?.color as string) || 'default';
-                const title = (token.data?.title as string) || 'Click to reveal spoiler';
-                const customIcon = (token.data?.icon as string) || '';
+                const color = (token.attributes?.color as string) || 'default';
+                const title = (token.attributes?.title as string) || 'Click to reveal spoiler';
+                const customIcon = (token.attributes?.icon as string) || '';
 
                 // Check if color is hex code (starts with #)
                 const isHexColor = typeof color === 'string' && color.startsWith('#');
@@ -107,7 +108,7 @@ export const spoilerExtension: Extension = {
                 }
 
                 // Use pre-rendered children from the renderer
-                const renderedChildren = token.data?.renderedChildren as string | undefined;
+                const renderedChildren = token.attributes?.renderedChildren as string | undefined;
                 const renderedContent = renderedChildren || token.content;
 
                 // Use custom icon if provided, otherwise use scheme icon

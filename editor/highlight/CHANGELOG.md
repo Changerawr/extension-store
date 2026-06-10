@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.0] - 2026-06-09
+
+### Fixed
+- Migrated token data storage from non-standard `data` field to `attributes` — aligns with the `MarkdownToken` type interface and library documentation, fixes color being lost when the library validates/serializes tokens
+
 ## [1.3.0] - 2026-06-09
 
 ### Fixed

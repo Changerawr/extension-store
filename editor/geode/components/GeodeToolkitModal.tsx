@@ -7,6 +7,17 @@ interface GeodeModalProps {
   onClose: () => void;
 }
 
+const BADGE_OPTIONS = [
+  { id: 'version', label: 'Version' },
+  { id: 'downloads', label: 'Downloads' },
+  { id: 'gd_version', label: 'GD Version' },
+  { id: 'geode_version', label: 'Geode Version' },
+] as const;
+
+const BADGE_LABELS: Record<string, string> = Object.fromEntries(
+  BADGE_OPTIONS.map(({ id, label }) => [id, label])
+);
+
 const COLORS = [
   { tag: 'cb', name: 'Blue', hex: '#4A52E1' },
   { tag: 'cg', name: 'Green', hex: '#40E348' },
@@ -61,7 +72,7 @@ export function GeodeToolkitModal({ textarea, onClose }: GeodeModalProps) {
   const handleBadgesInsert = () => {
     if (modId.trim() && selectedBadges.size > 0) {
       const badges = Array.from(selectedBadges)
-        .map(badge => `![${badge}](https://api.geode-sdk.org/v1/mods/${modId}/badges/${badge})`)
+        .map(stat => `![${BADGE_LABELS[stat]}](https://api.geode-sdk.org/v1/mods/${modId}/status_badge?stat=${stat})`)
         .join(' ');
       insertMarkdown(badges);
     }
@@ -238,12 +249,7 @@ export function GeodeToolkitModal({ textarea, onClose }: GeodeModalProps) {
             <div>
               <label className="block text-sm font-medium mb-3">Select Badges</label>
               <div className="grid grid-cols-2 gap-3">
-                {[
-                  { id: 'version', label: 'Version' },
-                  { id: 'downloads', label: 'Downloads' },
-                  { id: 'gd', label: 'GD Version' },
-                  { id: 'geode', label: 'Geode Version' },
-                ].map(({ id, label }) => (
+                {BADGE_OPTIONS.map(({ id, label }) => (
                   <button
                     key={id}
                     onClick={() => {
@@ -273,9 +279,9 @@ export function GeodeToolkitModal({ textarea, onClose }: GeodeModalProps) {
                   {selectedBadges.size} badge{selectedBadges.size !== 1 ? 's' : ''} selected
                 </p>
                 <div className="space-y-1">
-                  {Array.from(selectedBadges).map(badge => (
-                    <p key={badge} className="text-xs font-mono text-muted-foreground">
-                      ![{badge}](https://api.geode-sdk.org/v1/mods/{modId}/badges/{badge})
+                  {Array.from(selectedBadges).map(stat => (
+                    <p key={stat} className="text-xs font-mono text-muted-foreground break-all">
+                      ![{BADGE_LABELS[stat]}](https://api.geode-sdk.org/v1/mods/{modId}/status_badge?stat={stat})
                     </p>
                   ))}
                 </div>

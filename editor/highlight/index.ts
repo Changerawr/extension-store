@@ -1,10 +1,11 @@
-import type { Extension, ExtensionMetadata } from '@changerawr/markdown';
+import type { Extension } from '@changerawr/markdown';
+import type { ExtensionMetadata } from '@/lib/services/extensions/sdk';
 import { highlightToolbar } from './toolbar';
 
 export const metadata: ExtensionMetadata = {
     name: 'highlight',
     displayName: 'Text Highlighter',
-    version: '1.3.0',
+    version: '1.5.0',
     author: 'changerawr',
     description: 'Highlight text with hex colors. Pick from 7 presets or choose any custom color.',
     category: 'formatting',
@@ -18,28 +19,30 @@ export const highlightExtension: Extension = {
     parseRules: [
         {
             name: 'highlight-default',
+            scope: 'inline',
             pattern: /==([^=\n]+)==/,
             render: (match: RegExpMatchArray) => {
                 return {
                     type: 'highlight',
                     content: match[1] || '',
                     raw: match[0] || '',
-                    data: {
-                        color: '#fef08a',  // Default yellow
+                    attributes: {
+                        color: '#fef08a',
                     },
                 };
             },
         },
         {
             name: 'highlight-colored',
+            scope: 'inline',
             pattern: /==\{([^}]+)\}([^=\n]+)==/,
             render: (match: RegExpMatchArray) => {
                 return {
                     type: 'highlight',
                     content: match[2] || '',
                     raw: match[0] || '',
-                    data: {
-                        color: match[1] || '#fef08a',  // Default yellow
+                    attributes: {
+                        color: match[1] || '#fef08a',
                     },
                 };
             },
@@ -49,8 +52,9 @@ export const highlightExtension: Extension = {
         {
             type: 'highlight',
             render: (token) => {
-                const color = (token.data?.color as string) || '#fef08a';
-                return `<mark style="background-color: ${color}; color: inherit; display: inline; padding: 1px 4px; border-radius: 3px;">${token.content}</mark>`;
+                const color = (token.attributes?.color as string) || '#fef08a';
+                const content = (token.attributes?.renderedChildren as string) || token.content;
+                return `<mark style="background-color: ${color}; color: inherit; display: inline; padding: 1px 4px; border-radius: 3px;">${content}</mark>`;
             },
         },
     ],

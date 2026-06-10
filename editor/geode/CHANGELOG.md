@@ -2,6 +2,19 @@
 
 All notable changes to the GeodeMD extension will be documented in this file.
 
+## [1.1.0] - 2026-06-09
+
+### Fixed
+- **Status badge URLs** - Badges now use the correct Geode API endpoint
+  (`/v1/mods/MOD_ID/status_badge?stat=STAT`) instead of the old, non-functional
+  `/badges/BADGE_TYPE` format
+- **Badge stat IDs** - "GD Version" and "Geode Version" now use the correct
+  `gd_version`/`geode_version` stat IDs (previously `gd`/`geode`)
+- **Badge rendering** - Status badges now render as small, inline, clickable
+  badges instead of being mis-rendered as large centered images
+- Removed a leftover development-only WebSocket/eval connector from the
+  extension's load hook (dead code, security risk)
+
 ## [1.0.3] - 2026-05-18
 
 ### Added

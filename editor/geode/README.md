@@ -94,15 +94,20 @@ Insert dynamic status badges from the Geode API that show real-time mod informat
 ### Syntax
 
 ```markdown
-![badge-type](https://api.geode-sdk.org/v1/mods/MOD_ID/badges/BADGE_TYPE)
+![Label](https://api.geode-sdk.org/v1/mods/MOD_ID/status_badge?stat=STAT)
 ```
+
+`STAT` is one of `version`, `downloads`, `gd_version`, or `geode_version`.
 
 ### Example
 
 ```markdown
-![version](https://api.geode-sdk.org/v1/mods/geode.loader/badges/version)
-![downloads](https://api.geode-sdk.org/v1/mods/geode.loader/badges/downloads)
+![Version](https://api.geode-sdk.org/v1/mods/geode.loader/status_badge?stat=version)
+![Downloads](https://api.geode-sdk.org/v1/mods/geode.loader/status_badge?stat=downloads)
 ```
+
+Badges inserted via this syntax render as small, clickable inline badges (linking
+to the mod's Geode SDK page) instead of full-size images.
 
 ## Complete Example
 
@@ -121,8 +126,8 @@ Welcome to <cy>Golden Valley</cy>! This is a <cb>medium demon</cb> level created
 
 I recommend using [Geode](mod:geode.loader) to play this level with these mods:
 
-![version](https://api.geode-sdk.org/v1/mods/geode.loader/badges/version)
-![downloads](https://api.geode-sdk.org/v1/mods/geode.loader/badges/downloads)
+![Version](https://api.geode-sdk.org/v1/mods/geode.loader/status_badge?stat=version)
+![Downloads](https://api.geode-sdk.org/v1/mods/geode.loader/status_badge?stat=downloads)
 
 Have fun and <cy>good luck</cy>! <cb>GG</cb>!
 ```
@@ -138,6 +143,6 @@ Have fun and <cy>good luck</cy>! <cb>GG</cb>!
 
 - Color tags use inline CSS with `font-weight: 600` for emphasis
 - Links use `target="_blank"` to open in new tabs
-- Badges are live images from the Geode API
+- Badges are live images from the Geode API, rendered inline and linked to the mod's page
 - All features work in both light and dark themes
 - Zero external CSS dependencies

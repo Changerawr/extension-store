@@ -1,4 +1,4 @@
-import type { ExtensionToolbar } from '@changerawr/markdown';
+import type { ExtensionToolbar } from '@/lib/services/extensions/sdk';
 import { HighlightPopover } from './components/HighlightPopover';
 
 export const highlightToolbar: ExtensionToolbar = {
@@ -8,7 +8,7 @@ export const highlightToolbar: ExtensionToolbar = {
             icon: 'Highlighter',
             tooltip: 'Highlight Text',
             group: 'formatting',
-            onClick: (textarea) => {
+            onClick: (textarea: HTMLTextAreaElement) => {
                 // This will trigger the popover to open
                 // The actual popover rendering is handled by customUI below
             },
