@@ -4,7 +4,7 @@ import { geodeToolbar } from './toolbar';
 export const metadata = {
   name: 'geode',
   displayName: 'GeodeMD',
-  version: '1.1.0',
+  version: '1.1.1',
   author: 'changerawr',
   description: 'Geometry Dash color tags, clickable GD links, and Geode API status badges for markdown.',
   category: 'formatting',
