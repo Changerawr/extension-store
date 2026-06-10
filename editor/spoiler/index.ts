@@ -1,5 +1,5 @@
 import type { Extension, ExtensionMetadata } from '@/lib/services/extensions/sdk';
-import { spoilerToolbar } from '@/extensions/changerawr/spoiler/toolbar';
+import { spoilerToolbar } from './toolbar';
 
 export const metadata: ExtensionMetadata = {
     name: 'spoiler',
